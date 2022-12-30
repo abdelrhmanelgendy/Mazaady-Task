@@ -1,18 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    tools:context=".presentation.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/mazaad_header"
+        layout="@layout/layout_header" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.core.widget.NestedScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".presentation.MainActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_6sdp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_main_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:drawablePadding="0dp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/main_category"
+                    android:text="@string/select_main_category" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_sub_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:drawablePadding="0dp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/sub_category"
+                    android:text="@string/select_sub_category" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_process_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:drawablePadding="0dp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/process_type" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_from_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/from_user" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_brand"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:drawablePadding="0dp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/brand" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_model"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:drawablePadding="0dp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/model" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_type"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:drawablePadding="0dp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/type" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_transmissionType"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:drawablePadding="0dp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/transmission_type" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_FuelType"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:drawablePadding="0dp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/fuel_type" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_condition"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:drawablePadding="0dp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/condition" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:layout_marginTop="@dimen/_5sdp"
+android:paddingStart="@dimen/_20sdp"
+android:paddingEnd="@dimen/_20sdp"
+                />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

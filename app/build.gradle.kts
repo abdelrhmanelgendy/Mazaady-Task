@@ -1,12 +1,15 @@
 import org.jetbrains.kotlin.gradle.plugin.*
+
 plugins {
-    id (Deps.anroid_app_id)
-    kotlin ("android")
-    id (Deps.kotlin_kapt)
+    id(Deps.anroid_app_id)
+    kotlin("android")
+    id(Deps.kotlin_kapt)
+    id ("com.google.dagger.hilt.android")
+
 }
 
 subprojects {
-    apply(plugin = "dagger.hilt.android.plugin")
+    apply(plugin = Deps.dagger_hilt_plugin)
 }
 
 android {
@@ -26,29 +29,68 @@ android {
     buildTypes {
         getByName("release") {
 
-                isMinifyEnabled = false
-                proguardFiles (getDefaultProguardFile ("proguard-android-optimize.txt"), "proguard-rules.pro")
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
 
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility  = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = Versions.jvmTarget
+    }
+    buildFeatures {
+        viewBinding  = true
     }
 }
 
 dependencies {
 
+
+    //test
+    androidTestImplementation(Deps.androidx_junit)
+    androidTestImplementation(Deps.androidx_espresso)
+    testImplementation(Deps.powermock_api_mockito)
+    testImplementation(Deps.powermock_module)
+    testImplementation(Deps.powermock_module_junit4_rule_agent)
+    testImplementation(Deps.powermock_module_junit4_rule)
+    testImplementation(Deps.junit_test)
+    testImplementation(Deps.junit)
+    androidTestImplementation(Deps.android_x_junit)
+    androidTestImplementation(Deps.espresso)
+
+
+    //android
     implementation(Deps.androidx_core)
     implementation(Deps.androidx_app_compat)
     implementation(Deps.android_material)
     implementation(Deps.android_x_constraint_layout)
-    testImplementation(Deps.junit)
-    androidTestImplementation(Deps.android_x_junit)
-    androidTestImplementation(Deps.espresso)
-    implementation("com.google.dagger:hilt-android:2.38.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+
+//dagger
+    implementation(Deps.dagger_hilt_dep)
+    kapt(Deps.dagger_hilt_annotation)
+
+    //glide
+    implementation(Deps.glide)
+    implementation(Deps.glide_compiler)
+
+    //viewModel
+    implementation(Deps.coroutines_viewModel_life_cycle)
+    implementation(Deps.coroutines_runtime_life_cycle)
+
+    //retrofit
+    implementation(Deps.retrofit)
+    implementation(Deps.gson_converter)
+
+    implementation(Deps.circular_image)
+    implementation(Deps.ok_http_interceptor)
+    implementation(Deps.sdp)
+    implementation(Deps.fragment_version)
+
+
 }

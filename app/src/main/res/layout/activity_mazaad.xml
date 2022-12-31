@@ -11,8 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@id/linearPrice"
+         app:layout_constraintBottom_toTopOf="@id/linearPrice"
         >
 
         <LinearLayout
@@ -25,22 +24,22 @@
                 android:layout_height="match_parent"
 
                 >
-                <ImageView
-                    android:id="@+id/imageView"
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/youtube_player_view"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_150sdp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/back_ground"
-
+                    android:layout_height="@dimen/_180sdp"
+                    app:videoId="AFtUpMTs4vI"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:paddingBottom="@dimen/_30sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:autoPlay="true" />
 
                 <RelativeLayout
                     android:id="@+id/layoutMazaadDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_140sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/youtube_player_view"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -136,7 +135,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layoutDirection="rtl"
                     android:orientation="vertical"
 
@@ -375,7 +374,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="@dimen/_26sdp"
                                     android:layout_marginEnd="@dimen/_8sdp"
-                                    android:background="#F5D1DF"
+                                    android:background="@drawable/take_off_btn_background"
 
                                     android:fontFamily="@font/tajawal_bold"
                                     android:text="انسحاب"
@@ -445,8 +444,8 @@
                         >
 
                         <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="@dimen/_55sdp"
-                            android:layout_height="@dimen/_55sdp"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
                             android:layout_weight="1"
                             android:src="@drawable/man_one" />
 
@@ -508,8 +507,8 @@
                         >
 
                         <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="@dimen/_55sdp"
-                            android:layout_height="@dimen/_55sdp"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
                             android:layout_weight="1"
                             android:src="@drawable/man_three" />
 
@@ -571,8 +570,8 @@
                         >
 
                         <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="@dimen/_55sdp"
-                            android:layout_height="@dimen/_55sdp"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
                             android:layout_weight="1"
                             android:src="@drawable/man_two" />
 
@@ -686,8 +685,8 @@
                             android:orientation="horizontal">
 
                             <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="@dimen/_50sdp"
-                                android:layout_height="@dimen/_50sdp"
+                                android:layout_width="@dimen/_40sdp"
+                                android:layout_height="@dimen/_40sdp"
                                 android:src="@drawable/man_three" />
 
                             <LinearLayout
@@ -798,6 +797,7 @@
         </LinearLayout>
 
     </ScrollView>
+
 <LinearLayout
     android:id="@+id/linearPrice"
     android:layout_width="match_parent"
@@ -817,32 +817,33 @@
 
         >
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bet_btn_background"
-            android:text="10000+"
-            android:textSize="@dimen/_10sdp"
-            android:layout_margin="@dimen/_4sdp"
-            android:textColor="@color/white" />
+
 
         <Button
             android:layout_width="@dimen/_60sdp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_30sdp"
             android:background="@drawable/bet_btn_background"
             android:text="10000+"
             android:layout_margin="@dimen/_4sdp"
 
             android:textColor="@color/white" />
-
         <Button
             android:layout_width="@dimen/_60sdp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_30sdp"
             android:background="@drawable/bet_btn_background"
             android:text="10000+"
             android:layout_margin="@dimen/_4sdp"
 
             android:textColor="@color/white" />
+        <Button
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/bet_btn_background"
+            android:text="10000+"
+            android:layout_margin="@dimen/_4sdp"
+
+            android:textColor="@color/white" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

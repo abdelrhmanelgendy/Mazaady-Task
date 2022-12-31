@@ -16,17 +16,9 @@
         android:theme="@style/Theme.MazaadyTask"
         tools:targetApi="31">
         <activity
+            android:theme="@style/customMazaadTheme"
             android:name=".presentation.mazaad_activity.MazaadActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -39,10 +31,19 @@
                 android:value="" />
         </activity>
         <activity
+
             android:name=".presentation.create_mazaad.CreateMazaadActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
 
         <meta-data

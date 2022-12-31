@@ -29,6 +29,7 @@ import org.mazaady.com.domain.usecase.GetListOfSubCategoryByCategoryName
 import org.mazaady.com.presentation.CreateMazaadDataEvents
 import org.mazaady.com.presentation.bottom_sheet_dialog.BottomSheetSelectionDialog
 import org.mazaady.com.presentation.dialogs.LoadingProgressDialog
+import org.mazaady.com.presentation.mazaad_activity.MazaadActivity
 import org.mazaady.com.presentation.mazaad_result_viewer.MazaadResultActivity
 import org.mazaady.com.presentation.mazaad_result_viewer.model.MazaadDataModel
 import org.mazaady.com.presentation.mazaad_result_viewer.model.MazaadEntry
@@ -52,6 +53,9 @@ class CreateMazaadActivity : AppCompatActivity() {
         viewModel.onEvent(CreateMazaadDataEvents.GetCreateMazaadData);
 
         listenToSubmitButton()
+        binding.mazaadHeader.appBarAction.setOnClickListener {
+            startActivity(Intent(this,MazaadActivity::class.java))
+        }
 
     }
 

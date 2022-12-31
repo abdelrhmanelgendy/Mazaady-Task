@@ -40,7 +40,7 @@ object Versions {
     val sdp = "1.0.6"
     val fragment_version = "1.5.0-alpha05"
     val lifecycle_version = "2.5.1"
-
+val youtube ="11.1.0"
 }
 
 object Deps {
@@ -103,5 +103,7 @@ object Deps {
     val  ok_http_interceptor= "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp_interceptor}"
     val fragment_version= "androidx.fragment:fragment-ktx:${Versions.fragment_version}"
     val life_cycle_run_time= "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_version}"
+    val youtube_player="com.pierfrancescosoffritti.androidyoutubeplayer:core:${Versions.youtube}"
+
 
 }

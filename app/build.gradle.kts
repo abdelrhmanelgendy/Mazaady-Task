@@ -95,6 +95,8 @@ dependencies {
     implementation(Deps.sdp)
     implementation(Deps.fragment_version)
     implementation(Deps.life_cycle_run_time)
+    
+    implementation(Deps.youtube_player)
 
 
 }

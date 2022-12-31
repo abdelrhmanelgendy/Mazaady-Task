@@ -23,5 +23,6 @@
     <string name="specify_here">Specify Here</string>
     <string name="please_specify">Please enter</string>
     <string name="mazaad_data">Mazaad Data</string>
+    <string name="current_auction">المزاد الحالي</string>
 
 </resources>

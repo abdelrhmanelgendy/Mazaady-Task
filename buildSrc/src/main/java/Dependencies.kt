@@ -102,6 +102,6 @@ object Deps {
     val circular_image= "de.hdodenhof:circleimageview:${Versions.circular_image}"
     val  ok_http_interceptor= "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp_interceptor}"
     val fragment_version= "androidx.fragment:fragment-ktx:${Versions.fragment_version}"
-    val life_cycle_run_time "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    val life_cycle_run_time= "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_version}"
 
 }

@@ -7,13 +7,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import org.mazaady.com.R
-
-
-
+import org.mazaady.com.presentation.dialogs.LoadingProgressDialog
 
 
 fun View.hideKeyboard(context: Context) {
@@ -21,10 +21,29 @@ fun View.hideKeyboard(context: Context) {
     inputMethodManager.hideSoftInputFromWindow(this.windowToken, 0)
 }
 
-fun View.showSnackBar(@StringRes messageRes: Int, length: Int = Snackbar.LENGTH_LONG, f: Snackbar.() -> Unit) {
-    val snackBar = Snackbar.make(this, resources.getString(messageRes), length)
-    snackBar.f()
-    snackBar.show()
+fun Context.showToast(@StringRes messageRes: Int, length: Int = Toast.LENGTH_LONG) {
+   Toast.makeText(this, resources.getString(messageRes), length).show()
+ }
+fun Context.showProgressDialog(progressMsg:String="Loading"):LoadingProgressDialog{
+    val loadingProgressDialog =LoadingProgressDialog(this)
+    loadingProgressDialog.show(progressMsg)
+    return  loadingProgressDialog
+}
+fun LoadingProgressDialog.dismissProgressDialog(){
+  this.dismiss()
 }
 
+
+fun TextInputEditText.enable()
+{
+    this.setFocusable(true)
+    this.setFocusableInTouchMode(true)
+    this.setClickable(true)
+}
+fun TextInputEditText.disable()
+{
+    this.setFocusable(false)
+    this.setFocusableInTouchMode(false)
+    this.setClickable(false)
+}
 

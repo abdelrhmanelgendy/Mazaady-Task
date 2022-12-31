@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.mazaad_result_viewer.MazaadResultActivity">
+    <include
+        android:id="@+id/mazaad_header"
+        layout="@layout/layout_header_with_navigation" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mazzad_rcData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_5sdp"
+
+
+        />
+</LinearLayout>

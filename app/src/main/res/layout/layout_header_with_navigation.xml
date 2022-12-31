@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="@dimen/_10sdp"
+    android:background="@drawable/app_bar_shadow"
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/app_bar_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?actionBarItemBackground"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        />
+    <TextView
+        android:layout_marginStart="@dimen/_5sdp"
+        android:id="@+id/app_bar_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_new_mazaad"
+        android:textSize="@dimen/_20sdp"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-condensed-medium"
+
+        />
+
+</LinearLayout>

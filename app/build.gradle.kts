@@ -52,6 +52,9 @@ android {
 dependencies {
 
 
+    implementation("androidx.appcompat:appcompat:1.5.1")
+    implementation("com.google.android.material:material:1.4.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     //test
     androidTestImplementation(Deps.androidx_junit)
     androidTestImplementation(Deps.androidx_espresso)
@@ -91,6 +94,7 @@ dependencies {
     implementation(Deps.ok_http_interceptor)
     implementation(Deps.sdp)
     implementation(Deps.fragment_version)
+    implementation(Deps.life_cycle_run_time)
 
 
 }

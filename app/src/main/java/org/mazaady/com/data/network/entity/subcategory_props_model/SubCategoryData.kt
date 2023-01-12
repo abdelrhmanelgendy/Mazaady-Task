@@ -1,4 +1,4 @@
-package org.mazaady.com.data.network.subcategory_props_model
+package org.mazaady.com.data.network.entity.category_models.subcategory_props_model
 
 data class SubCategoryData(
     val description: Any?=null,
@@ -7,9 +7,13 @@ data class SubCategoryData(
     val name: String?=null,
     val options: List<Option>?=null,
     val other_value: Any?=null,
-    val parent: Any?=null,
+    val parent: Int?=null,
     val slug: String?=null,
     val type: String?=null,
     val value: String?=null,
-var selected:String?=null
-)
+    var selected:String?=null
+){
+    override fun toString(): String {
+        return "$name"
+    }
+}

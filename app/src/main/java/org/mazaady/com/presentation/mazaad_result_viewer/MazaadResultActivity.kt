@@ -8,6 +8,7 @@ import org.mazaady.com.R
 import org.mazaady.com.databinding.ActivityMainBinding
 import org.mazaady.com.databinding.ActivityMazaadResultBinding
 import org.mazaady.com.presentation.bottom_sheet_dialog.adapter.MazaadDataViewerRecyclerViewAdapter
+import org.mazaady.com.presentation.create_mazaad.CreateMazaadActivity.Companion.MAZAAD_DATA
 import org.mazaady.com.presentation.mazaad_result_viewer.model.MazaadDataModel
 
 
@@ -23,7 +24,7 @@ class MazaadResultActivity : AppCompatActivity() {
             finish()
         }
         mazaadDaataViewerAdapter=MazaadDataViewerRecyclerViewAdapter(this)
-        val mazaadDataModel = intent.extras?.getSerializable("data") as MazaadDataModel
+        val mazaadDataModel = intent.extras?.getSerializable(MAZAAD_DATA) as MazaadDataModel
         setUpRecyclerViewData(mazaadDataModel)
     }
 

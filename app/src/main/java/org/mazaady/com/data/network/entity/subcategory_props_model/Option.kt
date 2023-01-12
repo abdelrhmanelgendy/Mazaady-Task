@@ -1,4 +1,4 @@
-package org.mazaady.com.data.network.subcategory_props_model
+package org.mazaady.com.data.network.entity.category_models.subcategory_props_model
 
 data class Option(
     val child: Boolean?=null,

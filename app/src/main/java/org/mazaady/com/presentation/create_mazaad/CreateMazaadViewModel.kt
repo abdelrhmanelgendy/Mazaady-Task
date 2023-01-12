@@ -5,11 +5,13 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raminabbasiiii.cleanarchitectureapp.presentation.movie.detail.CategoryUiState
+import com.raminabbasiiii.cleanarchitectureapp.presentation.movie.detail.ChildOptionsUiState
 import com.raminabbasiiii.cleanarchitectureapp.presentation.movie.detail.SubCategoryUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import org.mazaady.com.domain.usecase.GetCategoryDataUseCase
+import org.mazaady.com.domain.usecase.GetChildOptionsByIdUseCase
 import org.mazaady.com.domain.usecase.GetSubCategoryPropsUseCase
 import org.mazaady.com.domain.util.DataState
 import org.mazaady.com.presentation.CreateMazaadDataEvents
@@ -21,6 +23,7 @@ class CreateMazaadViewModel
 constructor(
     private val getCategoryDataUseCase: GetCategoryDataUseCase,
     private val getSubCategoryPropsUseCase: GetSubCategoryPropsUseCase,
+    private val getChildOptionsByIdUseCase: GetChildOptionsByIdUseCase,
     private val savedStateHandle: SavedStateHandle
     ): ViewModel() {
 
@@ -30,6 +33,11 @@ constructor(
 
     private val _subCategoryPropsUiState = MutableStateFlow(SubCategoryUiState())
     val subCategoryPropsUiState: StateFlow<SubCategoryUiState> = _subCategoryPropsUiState.asStateFlow()
+
+    private val _childOptionsUiState = MutableStateFlow(ChildOptionsUiState())
+    val childOptionsUiState: StateFlow<ChildOptionsUiState> = _childOptionsUiState.asStateFlow()
+
+
     private var job: Job? = null
 
     init {
@@ -38,18 +46,19 @@ constructor(
         }
     }
 
-    fun onEvent(event: CreateMazaadDataEvents) {
-        when(event) {
-            is CreateMazaadDataEvents.GetCreateMazaadData -> {
-                getCategoriesData()
-            }
-            is CreateMazaadDataEvents.GetSubCreateMazaadProps -> {
-                getSubCategoryPropsData(event.id)
-            }
+    fun onEvent(event: CreateMazaadDataEvents) = when(event) {
+        is CreateMazaadDataEvents.GetCreateMazaadData -> {
+            getCategoriesData()
+        }
+        is CreateMazaadDataEvents.GetSubCreateMazaadProps -> {
+            getSubCategoryPropsData(event.id)
+        }
+        is CreateMazaadDataEvents.GetChildOptions -> {
+            getChildOptions(event.id)
+        }
 
-            else -> {
+        else -> {
 
-            }
         }
     }
 
@@ -78,7 +87,7 @@ constructor(
 
     }
     private fun getSubCategoryPropsData(id: String) {
-        Log.d("TAG665", "getSubCategoryPropsData: ")
+        Log.d("TAG665", "getSubCategoryPropsData: "+id)
         job?.cancel()
         job = getSubCategoryPropsUseCase(id)
             .onEach {
@@ -103,6 +112,31 @@ constructor(
 
     }
 
+    private fun getChildOptions(id: String) {
+        Log.d("TAG665", "getChildOptions: "+id)
+        job?.cancel()
+        job = getChildOptionsByIdUseCase(id)
+            .onEach {
+                    dataState ->
+                when(dataState) {
+                    is DataState.Loading -> {
+                        _childOptionsUiState.update { it.copy(isLoading = true) }
+                    }
+                    is DataState.Success -> {
+                        _childOptionsUiState.update { it.copy(isLoading = false) }
+                        _childOptionsUiState.update { it.copy(errorMessage = null) }
+                        dataState.data?.let { childOptions ->
+                            _childOptionsUiState.update { it.copy(childOptions = childOptions) }
+                        }
+                    }
+                    is DataState.Error -> {
+                        _childOptionsUiState.update { it.copy(isLoading = false) }
+                        _childOptionsUiState.update { it.copy(errorMessage = dataState.message) }
+                    }
+                }
+            }.launchIn(viewModelScope)
+
+    }
 
 
 }

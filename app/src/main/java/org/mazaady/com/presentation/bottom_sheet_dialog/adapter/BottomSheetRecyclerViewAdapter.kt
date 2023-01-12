@@ -2,7 +2,6 @@ package org.mazaady.com.presentation.bottom_sheet_dialog.adapter
 
 import NamesDiffUtils
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import org.mazaady.com.R
-import org.mazaady.com.databinding.BottomSheetItemBinding
+import org.mazaady.com.presentation.bottom_sheet_dialog.BottomSheetItem
 import org.mazaady.com.presentation.util.OnChoiceSelectedListener
 
 class BottomSheetRecyclerViewAdapter(
@@ -19,11 +18,12 @@ class BottomSheetRecyclerViewAdapter(
 ) :
     RecyclerView.Adapter<BottomSheetRecyclerViewAdapter.BottomSheetViewHolder>() {
 
-    private var userChoices = emptyList<String>()
+    private var userChoices = emptyList<BottomSheetItem>()
 
 
 
-    fun setData(updatedList: List<String>) {
+    fun setData(updatedList: List<BottomSheetItem>) {
+
         val projectsDiffUtil = NamesDiffUtils(userChoices, updatedList)
         val calculateDiffResult = DiffUtil.calculateDiff(projectsDiffUtil)
         userChoices = updatedList
@@ -36,7 +36,7 @@ class BottomSheetRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: BottomSheetViewHolder, position: Int) {
-        holder.bind(position, userChoices, context,onItemSelection)
+        holder.bind(position, userChoices,onItemSelection)
 
     }
 
@@ -48,13 +48,12 @@ class BottomSheetRecyclerViewAdapter(
         lateinit var etUserChoice: TextView
         fun bind(
             position: Int,
-            userChoices: List<String>,
-            context: Context,
+            userChoices: List<BottomSheetItem>,
             onItemSelection: OnChoiceSelectedListener
         ) {
             etUserChoice = itemView.findViewById(R.id.txtChoice)
             val currentItem = userChoices[position]
-             etUserChoice.text = currentItem
+             etUserChoice.text = currentItem.toString()
             itemView.setOnClickListener {
                 onItemSelection.onSelect(currentItem)
             }

@@ -4,10 +4,10 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mazaady.com.data.network.dto.category_models.AllCategories
-import org.mazaady.com.data.network.dto.category_models.Category
-import org.mazaady.com.data.network.dto.category_models.Children
-import org.mazaady.com.data.network.dto.category_models.Data
+import org.mazaady.com.data.network.entity.category_models.AllCategories
+import org.mazaady.com.data.network.entity.category_models.Category
+import org.mazaady.com.data.network.entity.category_models.Children
+import org.mazaady.com.data.network.entity.category_models.Data
 
 @RunWith(JUnit4::class)
 class GetIdOfSubCategoryByNameTest {
@@ -16,7 +16,7 @@ class GetIdOfSubCategoryByNameTest {
     fun `get list of sub category names with empty category name return empty names`() {
         val allCategories = provideAllCategoryModel()
         val subCategoryNamesList =
-            GetListOfSubCategoryByCategoryName()(allCategories, "")
+            GetListOfSheetItemsByCategoryName()(allCategories, "")
         Assert.assertEquals(subCategoryNamesList.size, 0)
     }
 
@@ -24,7 +24,7 @@ class GetIdOfSubCategoryByNameTest {
     fun `get list of sub category names with empty category list return empty names`() {
         val allCategories = AllCategories(data = Data(categories = arrayListOf()))
         val subCategoryNamesList =
-            GetListOfSubCategoryByCategoryName()(allCategories, "CARS , MOTORCYCLES & ACCESSORIES")
+            GetListOfSheetItemsByCategoryName()(allCategories, "CARS , MOTORCYCLES & ACCESSORIES")
         Assert.assertEquals(subCategoryNamesList.size, 0)
     }
 
@@ -32,7 +32,7 @@ class GetIdOfSubCategoryByNameTest {
     fun `get list of sub category names with null category list return empty names`() {
         val allCategories = AllCategories(data = Data(categories = null))
         val subCategoryNamesList =
-            GetListOfSubCategoryByCategoryName()(allCategories, "CARS , MOTORCYCLES & ACCESSORIES")
+            GetListOfSheetItemsByCategoryName()(allCategories, "CARS , MOTORCYCLES & ACCESSORIES")
         Assert.assertEquals(subCategoryNamesList.size, 0)
     }
 
@@ -40,7 +40,7 @@ class GetIdOfSubCategoryByNameTest {
     fun `get list of sub category names with correct category list return correct names`() {
         val allCategories = provideAllCategoryModel()
         val subCategoryNamesList =
-            GetListOfSubCategoryByCategoryName()(allCategories, "CARS , MOTORCYCLES & ACCESSORIES")
+            GetListOfSheetItemsByCategoryName()(allCategories, "CARS , MOTORCYCLES & ACCESSORIES")
         Assert.assertEquals(subCategoryNamesList.size, 4)
     }
 

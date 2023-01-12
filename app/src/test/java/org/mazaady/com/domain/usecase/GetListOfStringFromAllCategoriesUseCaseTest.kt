@@ -4,9 +4,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mazaady.com.data.network.dto.category_models.AllCategories
-import org.mazaady.com.data.network.dto.category_models.Category
-import org.mazaady.com.data.network.dto.category_models.Data
+import org.mazaady.com.data.network.entity.category_models.AllCategories
+import org.mazaady.com.data.network.entity.category_models.Category
+import org.mazaady.com.data.network.entity.category_models.Data
 
 @RunWith(JUnit4::class)
 
@@ -16,7 +16,7 @@ class GetListOfStringFromAllCategoriesUseCaseTest {
     fun `get list of category names with empty list return empty names`() {
         val allCategories = AllCategories(data = Data(categories = listOf()))
         val namesList =
-            GetListOfStringFromAllCategoriesUseCase()(allCategories)
+            GetListOfSheetItemsFromAllCategoriesUseCase()(allCategories)
         assertEquals(namesList.size, 0)
     }
 
@@ -24,7 +24,7 @@ class GetListOfStringFromAllCategoriesUseCaseTest {
     fun `get list of category names with null list return empty names`() {
         val allCategories = AllCategories(data = Data(categories = null))
         val namesList =
-            GetListOfStringFromAllCategoriesUseCase()(allCategories)
+            GetListOfSheetItemsFromAllCategoriesUseCase()(allCategories)
         assertEquals(namesList.size, 0)
     }
 
@@ -32,7 +32,7 @@ class GetListOfStringFromAllCategoriesUseCaseTest {
     fun `get list of category names with correct list return correct names`() {
         val allCategories =provideAllCategoryModel()
         val namesList =
-            GetListOfStringFromAllCategoriesUseCase()(allCategories)
+            GetListOfSheetItemsFromAllCategoriesUseCase()(allCategories)
         assertEquals(namesList.size, allCategories.data?.categories?.size)
     }
     private fun provideAllCategoryModel(): AllCategories {

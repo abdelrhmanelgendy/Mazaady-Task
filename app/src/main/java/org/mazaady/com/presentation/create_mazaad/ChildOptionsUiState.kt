@@ -2,10 +2,11 @@ package com.raminabbasiiii.cleanarchitectureapp.presentation.movie.detail
 
 import org.mazaady.com.data.network.entity.category_models.AllCategories
 import org.mazaady.com.data.network.entity.category_models.subcategory_props_model.SubCategoryProps
+import org.mazaady.com.data.network.entity.child_options_model.ChildOptions
 
 
-data class SubCategoryUiState(
+data class ChildOptionsUiState(
     val isLoading: Boolean = false,
-    val subCategoryProps: SubCategoryProps?=null,
+    val childOptions: ChildOptions?=null,
     val errorMessage: String? = null
 )

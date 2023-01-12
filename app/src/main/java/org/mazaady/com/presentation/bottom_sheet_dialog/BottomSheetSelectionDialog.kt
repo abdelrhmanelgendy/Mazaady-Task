@@ -18,7 +18,7 @@ import org.mazaady.com.presentation.util.OnChoiceSelectedListener
 
 class BottomSheetSelectionDialog(
     context: Context,
-    private val choices: List<String>,
+    private val choices: List<BottomSheetItem>,
     onItemSelection: OnChoiceSelectedListener
 ) {
     var bottomSheetDialog: BottomSheetDialog
@@ -65,7 +65,7 @@ class BottomSheetSelectionDialog(
 
             } else {
                 val filteredList = choices.filter { choice ->
-                    choice.toLowerCase().contains(txt.toLowerCase())
+                    choice.name.toString().toLowerCase().contains(txt.toLowerCase())
                 }
                 Log.d("TAG500", "listenToListFilter: "+filteredList)
                 bottomSheetRecyclerViewAdapter.setData(filteredList)

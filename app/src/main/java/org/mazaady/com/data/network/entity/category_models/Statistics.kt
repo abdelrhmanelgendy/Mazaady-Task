@@ -1,4 +1,4 @@
-package org.mazaady.com.data.network.dto.category_models
+package org.mazaady.com.data.network.entity.category_models
 
 data class Statistics(
     val auctions: Int,

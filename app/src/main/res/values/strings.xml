@@ -19,6 +19,7 @@
     <string name="search">Search</string>
     <string name="loading_categories">Loading Categories</string>
     <string name="loading_sub_category_data">Loading Sub Category Data</string>
+    <string name="loading_options_data">Loading Options Data</string>
     <string name="no_internt_connection">No Internt Connection</string>
     <string name="specify_here">Specify Here</string>
     <string name="please_specify">Please enter</string>

@@ -5,13 +5,17 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import org.mazaady.com.R
 import org.mazaady.com.presentation.dialogs.LoadingProgressDialog
 
@@ -45,5 +49,14 @@ fun TextInputEditText.disable()
     this.setFocusable(false)
     this.setFocusableInTouchMode(false)
     this.setClickable(false)
+}
+fun EditText.showKeyboard(){
+    this.postDelayed({
+     requestFocus()
+        val inputMethodManager =
+            context.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+    }, 100)
+
 }
 

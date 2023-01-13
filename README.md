@@ -1,7 +1,7 @@
 # Mazaady-Task
 
  <br/>
- <a href="https://github.com/abdelrhmanelgendy/Mazaady-Task/blob/master/mazzad_task.apk">test.apk</a>
+ <a href="https://github.com/abdelrhmanelgendy/Mazaady-Task/blob/master/Mazaad.apk">test.apk</a>
  
   <br/>
    <br/>
@@ -38,8 +38,8 @@ The project uses Clean architecture as structure pattern consisting of the layer
    <br/>
 
 <img src= "https://github.com/abdelrhmanelgendy/Mazaady-Task/blob/master/1.jpg" width="300">
-<img src= "https://github.com/abdelrhmanelgendy/Mazaady-Task/blob/master/2.jpg" width="300">
-<img src= "https://github.com/abdelrhmanelgendy/Mazaady-Task/blob/master/3.jpg" width="300">
+<img src= "https://github.com/abdelrhmanelgendy/Mazaady-Task/blob/master/2.png" width="300">
+<img src= "https://github.com/abdelrhmanelgendy/Mazaady-Task/blob/master/3.png" width="300">
 <img src= "https://github.com/abdelrhmanelgendy/Mazaady-Task/blob/master/4.jpg" width="300">
 <img src= "https://github.com/abdelrhmanelgendy/Mazaady-Task/blob/master/5.jpg" width="300">
 <img src= "https://github.com/abdelrhmanelgendy/Mazaady-Task/blob/master/6.jpg" width="300">

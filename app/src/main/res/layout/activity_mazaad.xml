@@ -30,9 +30,9 @@
                     android:layout_height="@dimen/_180sdp"
                     app:videoId="AFtUpMTs4vI"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:paddingBottom="@dimen/_30sdp"
+                    android:paddingBottom="@dimen/_45sdp"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:autoPlay="true" />
+                    app:autoPlay="false" />
 
                 <RelativeLayout
                     android:id="@+id/layoutMazaadDate"
@@ -124,10 +124,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/tajawal_bold"
-                                    android:text="دقيقه:ساعه:يوم"
+                                    android:text="دقيقه : ساعه : يوم"
 
                                     android:textColor="@color/yellow"
-                                    android:textSize="@dimen/_12sdp" />
+                                    android:textSize="@dimen/_8sdp" />
                             </LinearLayout>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -147,26 +147,27 @@
                         android:layout_height="wrap_content"
                         android:layoutDirection="rtl"
                         android:orientation="horizontal"
-                        android:paddingLeft="@dimen/_20sdp"
-                        android:paddingTop="@dimen/_10sdp"
+                         android:paddingTop="@dimen/_10sdp"
                         android:paddingRight="@dimen/_20sdp"
+                        android:weightSum="3"
                         android:paddingBottom="@dimen/_4sdp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="1.15"
                             android:fontFamily="@font/tajawal_bold"
                             android:text="اسم المزاد"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/tajawal_bold"
                             android:text=" تفاصيل المزاد >"
-                            android:textColor="@color/red"
+                            android:layout_weight="1"
+                             android:textColor="@color/red"
                             android:textSize="@dimen/_14sdp" />
                     </LinearLayout>
 
@@ -195,11 +196,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:numStars="5"
+                            android:layoutDirection="ltr"
 
                             android:rating="4"
                             android:theme="@style/RatingBar"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
@@ -628,14 +630,15 @@
                         android:orientation="vertical"
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingTop="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:paddingEnd="@dimen/_20sdp"
-                        android:paddingBottom="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_4sdp"
                         >
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
+android:layout_marginStart="@dimen/_10sdp"
                             android:orientation="horizontal">
 
                             <ImageView
@@ -746,7 +749,7 @@
                         android:paddingLeft="@dimen/_20sdp"
                         android:paddingTop="@dimen/_10sdp"
                         android:paddingRight="@dimen/_20sdp"
-                        android:paddingBottom="@dimen/_4sdp">
+                         >
 
 
                         <ImageView

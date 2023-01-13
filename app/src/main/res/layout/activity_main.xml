@@ -45,6 +45,7 @@
                         android:drawablePadding="0dp"
                         android:editable="false"
                         android:focusable="false"
+
                         android:hint="@string/main_category" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,10 +75,20 @@
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_20sdp"
                 android:text="@string/submit" />
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:text="@string/clear" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

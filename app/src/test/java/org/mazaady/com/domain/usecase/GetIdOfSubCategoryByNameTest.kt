@@ -4,10 +4,11 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mazaady.com.data.network.entity.category_models.AllCategories
-import org.mazaady.com.data.network.entity.category_models.Category
-import org.mazaady.com.data.network.entity.category_models.Children
-import org.mazaady.com.data.network.entity.category_models.Data
+import org.mazaady.com.data.category.dto.AllCategories
+import org.mazaady.com.data.category.dto.Category
+import org.mazaady.com.data.category.dto.Children
+import org.mazaady.com.data.category.dto.Data
+import org.mazaady.com.domain.category.usecase.GetListOfSheetItemsByCategoryName
 
 @RunWith(JUnit4::class)
 class GetIdOfSubCategoryByNameTest {

@@ -1,5 +1,4 @@
 import androidx.recyclerview.widget.DiffUtil
-import org.mazaady.com.data.network.entity.category_models.subcategory_props_model.SubCategoryData
 import org.mazaady.com.presentation.bottom_sheet_dialog.BottomSheetItem
 
 typealias itemsData =List<BottomSheetItem>

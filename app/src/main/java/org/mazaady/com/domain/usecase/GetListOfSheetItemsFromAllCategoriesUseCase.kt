@@ -1,7 +1,6 @@
 package org.mazaady.com.domain.usecase
 
-import org.mazaady.com.data.network.entity.category_models.AllCategories
-import org.mazaady.com.data.network.entity.category_models.subcategory_props_model.SubCategoryData
+import org.mazaady.com.data.category.dto.AllCategories
 import org.mazaady.com.presentation.bottom_sheet_dialog.BottomSheetItem
 
 class GetListOfSheetItemsFromAllCategoriesUseCase {

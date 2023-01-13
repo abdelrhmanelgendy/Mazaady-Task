@@ -1,4 +1,5 @@
 object Versions {
+    val androidx_work="2.7.1"
     val espresso = "3.5.0"
     val android_tools = "7.3.0"
     val kotlin_plugin = "1.7.0"
@@ -74,6 +75,7 @@ object Deps {
 
     val kotlin_kapt = "kotlin-kapt"
     val dagger_hilt_plugin = "dagger.hilt.android.plugin"
+    val android_dagger_hilt_plugin = "com.google.dagger.hilt.android"
 
     val dagger_hilt_dep = "com.google.dagger:hilt-android:${Versions.dagger_hilt_dep}"
     val dagger_hilt_annotation =
@@ -105,5 +107,7 @@ object Deps {
     val life_cycle_run_time= "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_version}"
     val youtube_player="com.pierfrancescosoffritti.androidyoutubeplayer:core:${Versions.youtube}"
 
+
+    val androidx_work="androidx.work:work-runtime-ktx:${Versions.androidx_work}"
 
 }

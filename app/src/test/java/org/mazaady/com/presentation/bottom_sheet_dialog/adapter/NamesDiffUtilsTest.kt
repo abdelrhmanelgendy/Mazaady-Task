@@ -1,10 +1,12 @@
 package org.mazaady.com.presentation.bottom_sheet_dialog.adapter
 
 import NamesDiffUtils
+import itemsData
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import org.mazaady.com.presentation.bottom_sheet_dialog.BottomSheetItem
 
 @RunWith(JUnit4::class)
 class NamesDiffUtilsTest{
@@ -41,22 +43,31 @@ class NamesDiffUtilsTest{
 
 
 
-    private fun buildEmptyOldList(): List<String> {
+    private fun buildEmptyOldList(): itemsData {
         return emptyList()
     }
-    private fun buildOldList(): List<String> {
+    private fun buildOldList(): itemsData {
         val item1= "CARS , MOTORCYCLES & ACCESSORIES"
         val item2= "REAL ESTATE , Trade Names"
-        return listOf(item1,item2)
+        return listOf(BottomSheetItem(
+            item1,-1,-1,false,false
+        ),BottomSheetItem(
+            item2,-1,-1,false,false
+        )
+        )
     }
 
-    private fun buildEmptyNewList(): List<String> {
+    private fun buildEmptyNewList(): itemsData {
         return emptyList()
     }
-    private fun buildNewList(): List<String> {
+    private fun buildNewList(): itemsData {
         val item1= "ANIMALS & ACCESSORIES"
         val item2= "EQUIPMENTS , TOOLS"
-        return listOf(item1,item2)
-    }
+        return listOf(BottomSheetItem(
+            item1,-1,-1,false,false
+        ),BottomSheetItem(
+            item2,-1,-1,false,false
+        )
+        )    }
 
 }

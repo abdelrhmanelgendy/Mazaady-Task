@@ -1,10 +1,9 @@
-import org.jetbrains.kotlin.gradle.plugin.*
 
 plugins {
     id(Deps.anroid_app_id)
     kotlin("android")
     id(Deps.kotlin_kapt)
-    id ("com.google.dagger.hilt.android")
+    id (Deps.android_dagger_hilt_plugin)
 
 }
 
@@ -52,9 +51,8 @@ android {
 dependencies {
 
 
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    implementation(Deps.androidx_work)
     //test
     androidTestImplementation(Deps.androidx_junit)
     androidTestImplementation(Deps.androidx_espresso)
@@ -64,8 +62,8 @@ dependencies {
     testImplementation(Deps.powermock_module_junit4_rule)
     testImplementation(Deps.junit_test)
     testImplementation(Deps.junit)
-    androidTestImplementation(Deps.android_x_junit)
     androidTestImplementation(Deps.espresso)
+    androidTestImplementation(Deps.android_x_junit)
 
 
     //android

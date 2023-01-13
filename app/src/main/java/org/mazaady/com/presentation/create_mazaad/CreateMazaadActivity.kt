@@ -6,10 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
-import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -23,15 +20,19 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.mazaady.com.R
-import org.mazaady.com.data.network.entity.category_models.AllCategories
-import org.mazaady.com.data.network.entity.category_models.subcategory_props_model.SubCategoryProps
+import org.mazaady.com.data.category.dto.AllCategories
+import org.mazaady.com.data.subCategory.dto.SubCategoryProps
 import org.mazaady.com.databinding.ActivityMainBinding
-import org.mazaady.com.domain.usecase.GetListOfSheetItemsByCategoryName
+import org.mazaady.com.domain.category.usecase.GetListOfSheetItemsByCategoryName
+import org.mazaady.com.domain.usecase.AddUserInputsWithoutOtherUseCase
 import org.mazaady.com.domain.usecase.GetListOfSheetItemsFromAllCategoriesUseCase
-import org.mazaady.com.presentation.CreateMazaadDataEvents
+import org.mazaady.com.domain.usecase.ValidateUserInputsUseCase
 import org.mazaady.com.presentation.bottom_sheet_dialog.BottomSheetItem
 import org.mazaady.com.presentation.bottom_sheet_dialog.BottomSheetSelectionDialog
 import org.mazaady.com.presentation.bottom_sheet_dialog.BottomSheetTiles
+import org.mazaady.com.presentation.create_mazaad.model.LinearEditeTextItem
+import org.mazaady.com.presentation.create_mazaad.viewmodel.CreateMazaadDataEvents
+import org.mazaady.com.presentation.create_mazaad.viewmodel.CreateMazaadViewModel
 import org.mazaady.com.presentation.dialogs.LoadingProgressDialog
 import org.mazaady.com.presentation.mazaad_activity.MazaadActivity
 import org.mazaady.com.presentation.mazaad_result_viewer.MazaadResultActivity
@@ -43,15 +44,17 @@ import org.mazaady.presentation.util.*
 
 @AndroidEntryPoint
 class CreateMazaadActivity : AppCompatActivity() {
+
     companion object {
         const val MAZAAD_DATA = "data"
+        const val OTHER = "Other"
+
     }
 
     private var options: ArrayList<BottomSheetTiles> = arrayListOf()
     private val TAG = "MainActivityTAG"
     private val viewModel: CreateMazaadViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
-    private val OTHER = "Other"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +63,6 @@ class CreateMazaadActivity : AppCompatActivity() {
         mRlayout = binding.etLinear
         subscribeObserver()
         viewModel.onEvent(CreateMazaadDataEvents.GetCreateMazaadData);
-
         listenToSubmitButton()
         binding.mazaadHeader.appBarAction.setOnClickListener {
             startActivity(Intent(this, MazaadActivity::class.java))
@@ -74,51 +76,44 @@ class CreateMazaadActivity : AppCompatActivity() {
                 viewMazaadData()
             }
         }
+        binding.btnClear.setOnClickListener {
+            dropDownETList.clear()
+            clearAllOptions()
+            clearSubCategory()
+        }
     }
 
     private fun viewMazaadData() {
         val userInputs = arrayListOf<MazaadEntry>()
-        dropDownETMap.forEach {
-            userInputs.add(MazaadEntry(it.name, it.item.editText?.text.toString()))
-        }
+
         userInputs.add(
             MazaadEntry(
-                getString(R.string.main_category),
-                binding.etMainCategory.editableText.toString()
+                getString(R.string.main_category), binding.etMainCategory.editableText.toString()
             )
         )
         userInputs.add(
             MazaadEntry(
-                getString(R.string.sub_category),
-                binding.etSubCategory.editableText.toString()
+                getString(R.string.sub_category), binding.etSubCategory.editableText.toString()
             )
         )
 
+        AddUserInputsWithoutOtherUseCase()(dropDownETList, userInputs)
+
+
         startActivity(
             Intent(this, MazaadResultActivity::class.java).putExtra(
-                MAZAAD_DATA,
-                MazaadDataModel(userInputs)
+                MAZAAD_DATA, MazaadDataModel(userInputs)
             )
         )
     }
 
     private fun validateUserInputs(): Boolean {
-        for (mutableEntry in dropDownETMap) {
-            if (mutableEntry.item.editText?.text.toString().isEmpty()) {
-                mutableEntry.item.error =
-                    getString(R.string.please_specify) + " ${mutableEntry.name}"
-                return false
-            } else {
-                mutableEntry.item.error = null
-            }
-        }
-        return true
+        return ValidateUserInputsUseCase()(dropDownETList, this)
 
     }
 
     private fun subscribeObserver() {
         lateinit var progressDialog: LoadingProgressDialog
-
         lifecycleScope.launch {
 
             viewModel.uiState.collectLatest { uiState ->
@@ -133,7 +128,6 @@ class CreateMazaadActivity : AppCompatActivity() {
                 }
 
                 if (uiState.errorMessage != null) {
-                    Log.d(TAG, "subscribeObserver: " + uiState.errorMessage)
                     progressDialog.dismissProgressDialog()
                     showToast(R.string.no_internt_connection)
 
@@ -143,22 +137,14 @@ class CreateMazaadActivity : AppCompatActivity() {
             }
         }
         lifecycleScope.launch {
-
             viewModel.subCategoryPropsUiState.collectLatest { uiState ->
 
                 if (uiState.isLoading) {
-                    Log.d(TAG, "subscribeObserver:Loading ")
                     progressDialog =
                         showProgressDialog(getString(R.string.loading_sub_category_data))
-
-
                 }
 
                 uiState.subCategoryProps?.let {
-                    it.data?.forEach {
-                        Log.d(TAG, "subscribeObserver: " + it.name)
-
-                    }
                     setUpRestOfDetails(it)
                     delay(500)
 
@@ -167,7 +153,6 @@ class CreateMazaadActivity : AppCompatActivity() {
                 }
 
                 if (uiState.errorMessage != null) {
-                    Log.d(TAG, "subscribeObserver: " + uiState.errorMessage)
                     progressDialog.dismissProgressDialog()
 
                     showToast(R.string.no_internt_connection)
@@ -180,59 +165,49 @@ class CreateMazaadActivity : AppCompatActivity() {
             viewModel.childOptionsUiState.collectLatest { uiState ->
 
                 if (uiState.isLoading) {
-                    progressDialog =
-                        showProgressDialog(getString(R.string.loading_options_data))
+                    progressDialog = showProgressDialog(getString(R.string.loading_options_data))
                 }
 
                 uiState.childOptions?.let { childOptions ->
                     delay(500)
                     progressDialog.dismissProgressDialog()
-                    Log.d(TAG, "subscribeObserver: " + options.size)
                     if (optionsContainsItem(childOptions.data!!.first().name)) {
                         options.removeAt(currentCLickedIndex + 1)
-
                     }
                     options.add(
-                        currentCLickedIndex + 1,
-                        BottomSheetTiles(
-                            name = childOptions.data.first().name, items =
-                            ArrayList(childOptions.data.first().options.map {
+                        currentCLickedIndex + 1, BottomSheetTiles(
+                            name = childOptions.data.first().name,
+                            items = ArrayList(childOptions.data.first().options.map {
                                 BottomSheetItem(
                                     name = it.name,
                                     id = it.id,
                                     parent = it.parent,
-                                    child = it.child, isOtherAdded = false
+                                    child = it.child,
+                                    isOtherAdded = false
                                 )
                             })
                         )
                     )
-                    Log.d(TAG, "subscribeObserver: " + options.size)
-
                     createOptionEditText(options)
 
                 }
 
                 if (uiState.errorMessage != null) {
-                    Log.d(TAG, "subscribeObserver: " + uiState.errorMessage)
                     progressDialog.dismissProgressDialog()
-
                     showToast(R.string.no_internt_connection)
                 }
 
             }
         }
     }
-/*
-handle names in the data viewer
-enhance main activity
-module app
-clean app arch
-on enter remove hint
- */
+
+    /*
+     module app
+    clean app arch
+      */
     private fun optionsContainsItem(name: String): Boolean {
         for (option in options) {
-            if (option.name.equals(name))
-                return true
+            if (option.name.equals(name)) return true
         }
         return false
     }
@@ -245,7 +220,8 @@ on enter remove hint
                         name = it.name!!,
                         id = it.id!!,
                         parent = it.parent!!,
-                        child = it.child ?: false, isOtherAdded = false
+                        child = it.child ?: false,
+                        isOtherAdded = false
                     )
 
                 }))
@@ -257,17 +233,17 @@ on enter remove hint
     }
 
 
-    val dropDownETMap = mutableListOf<LinearEditeTextItem>()
+    val dropDownETList = mutableListOf<LinearEditeTextItem>()
     var bottomSheetSelectionDialog: BottomSheetSelectionDialog? = null
     lateinit var mRlayout: LinearLayout
 
     private fun createOptionEditText(bottomSheetItems: ArrayList<BottomSheetTiles>) {
         clearAllOptions()
         this.options = bottomSheetItems;
-        dropDownETMap.forEach {
+        dropDownETList.forEach {
             mRlayout.removeView(it.item)
         }
-        dropDownETMap.clear()
+        dropDownETList.clear()
 
         bottomSheetItems.forEachIndexed { index, props ->
 
@@ -275,48 +251,40 @@ on enter remove hint
                 val editTextParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
                 )
-                val textInputLayout = buildUserInputTextInputLayout(this)
+                val textInputLayout = buildUserInputTextInputLayout()
                 val myEditText = buildUserInputCustomEditText(textInputLayout.context)
 
                 if (options.get(index).selectedOption.isNotEmpty()) {
                     myEditText.setText(options.get(index).selectedOption)
                 }
                 textInputLayout.addView(myEditText, editTextParams)
-                dropDownETMap.add(LinearEditeTextItem(props.name, textInputLayout))
+                dropDownETList.add(LinearEditeTextItem(props.name, textInputLayout))
                 mRlayout.addView(textInputLayout)
                 myEditText.addTextChangedListener {
-                    options.get(index).selectedOption=it.toString()
+                    options.get(index).selectedOption = it.toString()
                 }
 
                 myEditText.showKeyboard()
 
 
-
-            }
-            else {
+            } else {
                 val editTextParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
                 )
-                val textInputLayout = buildTextInputLayout(this, props.name)
+                val textInputLayout = buildTextInputLayout(props.name)
                 val myEditText = buildCustomEditText(textInputLayout.context)
 
                 if (options.get(index).selectedOption.isNotEmpty()) {
                     myEditText.setText(options.get(index).selectedOption)
                 }
                 textInputLayout.addView(myEditText, editTextParams)
-                dropDownETMap.add(LinearEditeTextItem(props.name.toString(), textInputLayout))
+                dropDownETList.add(LinearEditeTextItem(props.name.toString(), textInputLayout))
                 mRlayout.addView(textInputLayout)
-                Log.d(TAG, "createOptionEditText: "+props.items)
                 textInputLayout.requestFocus()
-
 
                 if (!props.items.contains(
                         BottomSheetItem(
-                            OTHER,
-                            -1,
-                            -1,
-                            false,
-                            isOtherAdded = false
+                            OTHER, -1, -1, false, isOtherAdded = false
                         )
                     )
                 ) {
@@ -324,8 +292,8 @@ on enter remove hint
 
                 }
                 myEditText.setOnClickListener {
-                    bottomSheetSelectionDialog = BottomSheetSelectionDialog(
-                        this, props.items,
+                    bottomSheetSelectionDialog = BottomSheetSelectionDialog(this,
+                        props.items,
                         object : OnChoiceSelectedListener {
                             override fun onSelect(categoryData: BottomSheetItem) {
                                 bottomSheetSelectionDialog?.dismiss()
@@ -336,13 +304,10 @@ on enter remove hint
                                         options.get(index).selectedOption = "Other"
 
                                         options.add(
-                                            currentCLickedIndex + 1,
-                                            BottomSheetTiles(
-                                                name = OTHER,
-                                                items = arrayListOf(), ""
+                                            currentCLickedIndex + 1, BottomSheetTiles(
+                                                name = OTHER, items = arrayListOf(), ""
                                             )
                                         )
-                                        Log.d(TAG, "subscribeObserver: " + options.size)
 
                                         createOptionEditText(options)
                                         props.isOtherAdded = true
@@ -350,25 +315,20 @@ on enter remove hint
 
 
                                 } else {
-                                    Log.d(TAG, "onSelect1212: "+props.isOtherAdded.toString())
                                     myEditText.setText(categoryData.name)
                                     options.get(index).selectedOption = categoryData.name
 
                                     if (props.isOtherAdded!!) {
-
                                         currentCLickedIndex = index;
                                         options.removeAt(
-                                            currentCLickedIndex+1,
-                                            )
-
-                                        Log.d(TAG, "subscribeObserver:2121 " + options.size)
-
+                                            currentCLickedIndex + 1,
+                                        )
                                         createOptionEditText(options)
                                         props.isOtherAdded = false
                                     }
                                     if (categoryData.child) {
                                         currentCLickedIndex = index;
-                                        createChildOptionForCurrentCategory(categoryData, index);
+                                        createChildOptionForCurrentCategory(categoryData);
                                     }
                                 }
 
@@ -401,7 +361,6 @@ on enter remove hint
     }
 
     private fun buildTextInputLayout(
-        context: Context,
         name: String?
     ): TextInputLayout {
 
@@ -421,7 +380,6 @@ on enter remove hint
     }
 
     private fun buildUserInputTextInputLayout(
-        context: Context,
     ): TextInputLayout {
 
         val textInputLayout = TextInputLayout(this, null, R.attr.customTextInputStyle)
@@ -435,7 +393,7 @@ on enter remove hint
             )
         );
         textInputLayout.layoutParams = textInputLayoutParams
-        textInputLayout.hint = ("Specify here")
+        textInputLayout.hint = (getString(R.string.Specify_here))
         return textInputLayout
     }
 
@@ -444,17 +402,15 @@ on enter remove hint
     ): TextInputEditText {
         val myEditText = TextInputEditText(context)
         myEditText.setTextColor(Color.BLACK)
-        myEditText.hint="From User"
-        myEditText.imeOptions= EditorInfo.IME_ACTION_NEXT
-        myEditText.inputType= InputType.TYPE_CLASS_TEXT
+        myEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
+        myEditText.inputType = InputType.TYPE_CLASS_TEXT
         return myEditText
     }
 
     var currentCLickedIndex = -1;
 
-    private fun createChildOptionForCurrentCategory(categoryData: BottomSheetItem, index: Int) {
+    private fun createChildOptionForCurrentCategory(categoryData: BottomSheetItem) {
         viewModel.onEvent(CreateMazaadDataEvents.GetChildOptions(categoryData.id.toString()));
-
     }
 
 
@@ -470,11 +426,12 @@ on enter remove hint
                         binding.etMainCategory.setText(categoryData.name)
 
                         filterSubCategoriesByCategoryName(
-                            categoryData.name.toString(),
-                            allCategories
+                            categoryData.name, allCategories
                         )
                         clearSubCategory()
                         clearAllOptions()
+                        options.clear()
+                        dropDownETList.clear()
                     }
 
                 })
@@ -483,10 +440,9 @@ on enter remove hint
     }
 
     private fun clearAllOptions() {
-        dropDownETMap.forEach {
+        dropDownETList.forEach {
             mRlayout.removeView(it.item)
         }
-//        options.clear()
 
     }
 
@@ -502,7 +458,6 @@ on enter remove hint
                 object : OnChoiceSelectedListener {
                     override fun onSelect(categoryData: BottomSheetItem) {
                         bottomSheetSelectionDialog?.dismiss()
-                        Log.d(TAG, "onSelect: " + categoryData)
                         binding.etSubCategory.setText(categoryData.name)
                         viewModel.onEvent(
                             CreateMazaadDataEvents.GetSubCreateMazaadProps(

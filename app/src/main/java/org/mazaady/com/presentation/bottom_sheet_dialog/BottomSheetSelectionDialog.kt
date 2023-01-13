@@ -58,7 +58,6 @@ class BottomSheetSelectionDialog(
 
     private fun listenToListFilter() {
         sheetSelectionBinding.etSeacrh.addTextChangedListener {
-            Log.d("TAG500", "listenToListFilter: "+it.toString())
             val txt = it.toString()
             if (txt.toString().isEmpty()) {
                 bottomSheetRecyclerViewAdapter.setData(choices)
@@ -67,7 +66,6 @@ class BottomSheetSelectionDialog(
                 val filteredList = choices.filter { choice ->
                     choice.name.toString().toLowerCase().contains(txt.toLowerCase())
                 }
-                Log.d("TAG500", "listenToListFilter: "+filteredList)
                 bottomSheetRecyclerViewAdapter.setData(filteredList)
             }
         }

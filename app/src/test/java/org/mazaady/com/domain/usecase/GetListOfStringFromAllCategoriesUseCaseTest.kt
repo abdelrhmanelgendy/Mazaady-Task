@@ -4,9 +4,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mazaady.com.data.network.entity.category_models.AllCategories
-import org.mazaady.com.data.network.entity.category_models.Category
-import org.mazaady.com.data.network.entity.category_models.Data
+import org.mazaady.com.data.category.dto.AllCategories
+import org.mazaady.com.data.category.dto.Category
+import org.mazaady.com.data.category.dto.Data
 
 @RunWith(JUnit4::class)
 

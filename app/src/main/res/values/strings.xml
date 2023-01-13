@@ -25,5 +25,7 @@
     <string name="please_specify">Please enter</string>
     <string name="mazaad_data">Mazaad Data</string>
     <string name="current_auction">المزاد الحالي</string>
+    <string name="Specify_here">Specify here</string>
+    <string name="clear">Clear</string>
 
 </resources>

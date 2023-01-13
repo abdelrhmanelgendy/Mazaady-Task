@@ -1,6 +1,6 @@
 package org.mazaady.com.domain.usecase
 
-import org.mazaady.com.data.network.entity.category_models.subcategory_props_model.SubCategoryProps
+import org.mazaady.com.data.subCategory.dto.SubCategoryProps
 
 class GetListOfOptionsBySubCategoryProps {
     operator fun invoke(subCategoryProps: SubCategoryProps, optionName:String):

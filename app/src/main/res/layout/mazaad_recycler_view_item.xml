@@ -18,7 +18,7 @@
             android:textAlignment="center"
 
             android:textColor="@color/black"
-            android:textSize="@dimen/_16sdp" />
+            android:textSize="@dimen/_12sdp" />
 
         <TextView
             android:id="@+id/mazaad_item_value"
@@ -28,7 +28,7 @@
             android:fontFamily="sans-serif-condensed-medium"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/_16sdp"
+            android:textSize="@dimen/_12sdp"
 
             />
     </LinearLayout>

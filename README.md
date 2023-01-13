@@ -29,6 +29,7 @@ The project uses Clean architecture as structure pattern consisting of the layer
 * Repository tests.
 * Use cases test.
 * Adapters Diff Utils.
+* Test Suites contains the important test classes combined together
  
 
  

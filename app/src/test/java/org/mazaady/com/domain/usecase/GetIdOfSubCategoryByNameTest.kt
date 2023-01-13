@@ -52,14 +52,14 @@ class GetIdOfSubCategoryByNameTest {
         return AllCategories(
             data = Data(
                 categories = listOf(
-                    Category(name = "CARS , MOTORCYCLES & ACCESSORIES",
+                    Category(name = "CARS , MOTORCYCLES & ACCESSORIES", id = -1,
                         children = listOf(
-                            Children(name = "Cars"),
-                            Children(name = "Auto Parts & Accessories"),
-                            Children(name = "Motorcycles"),
-                            Children(name = "Bicycles"),
+                            Children(name = "Cars", id = -1),
+                            Children(name = "Auto Parts & Accessories", id = -1),
+                            Children(name = "Motorcycles", id = -1),
+                            Children(name = "Bicycles", id = -1),
                         )),
-                    Category(name = "FURNITURE & FURNISHINGS FITTINGS"),
+                    Category(name = "FURNITURE & FURNISHINGS FITTINGS", id = -1),
 
                 )
             )

@@ -5,6 +5,8 @@
     android:background="@drawable/app_bar_shadow"
     android:orientation="horizontal"
     android:gravity="center_horizontal"
+    android:layoutDirection="ltr"
+
     android:layout_gravity="center_horizontal"
     android:layout_height="wrap_content">
     <ImageView

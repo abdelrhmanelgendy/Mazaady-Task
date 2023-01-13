@@ -39,10 +39,10 @@ class GetListOfStringFromAllCategoriesUseCaseTest {
         return AllCategories(
             data = Data(
                 categories = listOf(
-                    Category(name = "CARS , MOTORCYCLES & ACCESSORIES"),
-                    Category(name = "FURNITURE & FURNISHINGS FITTINGS"),
-                    Category(name = "ELECTRICAL, MOBILES & ACCESSORIES"),
-                    Category(name = "REAL ESTATE , Trade Names"),
+                    Category(name = "CARS , MOTORCYCLES & ACCESSORIES", id = -1),
+                    Category(name = "FURNITURE & FURNISHINGS FITTINGS", id = -1),
+                    Category(name = "ELECTRICAL, MOBILES & ACCESSORIES", id = -1),
+                    Category(name = "REAL ESTATE , Trade Names", id = -1),
                 )
             )
         )

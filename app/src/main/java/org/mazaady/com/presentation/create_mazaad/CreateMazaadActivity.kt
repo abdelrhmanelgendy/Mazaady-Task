@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.InputType
+import android.util.LayoutDirection
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
 import androidx.activity.viewModels
@@ -52,8 +53,7 @@ class CreateMazaadActivity : AppCompatActivity() {
     }
 
     private var options: ArrayList<BottomSheetTiles> = arrayListOf()
-    private val TAG = "MainActivityTAG"
-    private val viewModel: CreateMazaadViewModel by viewModels()
+     private val viewModel: CreateMazaadViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,14 +77,26 @@ class CreateMazaadActivity : AppCompatActivity() {
             }
         }
         binding.btnClear.setOnClickListener {
-            dropDownETList.clear()
             clearAllOptions()
             clearSubCategory()
+            dropDownETList.clear()
+
         }
     }
 
     private fun viewMazaadData() {
         val userInputs = arrayListOf<MazaadEntry>()
+        clearError()
+        if(validateCategory( binding.etMainCategory.editableText.toString()))
+        {
+            binding.etLayoutMainCategory.error = getString(R.string.please_specify)+" the main category"
+            return
+        }
+        if(validateCategory(binding.etSubCategory.editableText.toString()))
+        {
+            binding.etLayoutSubCategory.error = getString(R.string.please_specify)+" the sub category"
+            return
+        }
 
         userInputs.add(
             MazaadEntry(
@@ -105,6 +117,18 @@ class CreateMazaadActivity : AppCompatActivity() {
                 MAZAAD_DATA, MazaadDataModel(userInputs)
             )
         )
+    }
+
+    private fun clearError() {
+        binding.etLayoutMainCategory.error = null
+        binding.etSubCategory.error = null
+        binding.etMainCategory.error = null
+        binding.etLayoutSubCategory.error = null
+    }
+
+    private fun validateCategory(txt: String): Boolean {
+        return txt.isEmpty()
+
     }
 
     private fun validateUserInputs(): Boolean {
@@ -258,7 +282,7 @@ class CreateMazaadActivity : AppCompatActivity() {
                     myEditText.setText(options.get(index).selectedOption)
                 }
                 textInputLayout.addView(myEditText, editTextParams)
-                dropDownETList.add(LinearEditeTextItem(props.name, textInputLayout))
+                dropDownETList.add(LinearEditeTextItem(props.name, textInputLayout,parent = props.parent))
                 mRlayout.addView(textInputLayout)
                 myEditText.addTextChangedListener {
                     options.get(index).selectedOption = it.toString()
@@ -278,7 +302,7 @@ class CreateMazaadActivity : AppCompatActivity() {
                     myEditText.setText(options.get(index).selectedOption)
                 }
                 textInputLayout.addView(myEditText, editTextParams)
-                dropDownETList.add(LinearEditeTextItem(props.name.toString(), textInputLayout))
+                dropDownETList.add(LinearEditeTextItem(props.name, textInputLayout))
                 mRlayout.addView(textInputLayout)
                 textInputLayout.requestFocus()
 
@@ -301,11 +325,11 @@ class CreateMazaadActivity : AppCompatActivity() {
                                     if (!props.isOtherAdded!!) {
 
                                         currentCLickedIndex = index;
-                                        options.get(index).selectedOption = "Other"
+                                        options.get(index).selectedOption = OTHER
 
                                         options.add(
                                             currentCLickedIndex + 1, BottomSheetTiles(
-                                                name = OTHER, items = arrayListOf(), ""
+                                                name = OTHER, items = arrayListOf(), "", parent = options.get(index).name
                                             )
                                         )
 
@@ -336,7 +360,7 @@ class CreateMazaadActivity : AppCompatActivity() {
                             }
 
                         })
-                    bottomSheetSelectionDialog?.show(props.name.toString())
+                    bottomSheetSelectionDialog?.show(props.name)
                 }
             }
 
@@ -357,6 +381,8 @@ class CreateMazaadActivity : AppCompatActivity() {
         img.setBounds(0, 0, 60, 60)
         myEditText.setCompoundDrawables(null, null, img, null)
         myEditText.setTextColor(Color.BLACK)
+        myEditText.layoutDirection=LayoutDirection.LTR
+
         return myEditText
     }
 
@@ -374,6 +400,8 @@ class CreateMazaadActivity : AppCompatActivity() {
                 this, android.R.color.white
             )
         );
+        textInputLayout.layoutDirection=LayoutDirection.LTR
+
         textInputLayout.layoutParams = textInputLayoutParams
         textInputLayout.hint = (name)
         return textInputLayout
@@ -392,6 +420,8 @@ class CreateMazaadActivity : AppCompatActivity() {
                 this, android.R.color.white
             )
         );
+        textInputLayout.layoutDirection=LayoutDirection.LTR
+
         textInputLayout.layoutParams = textInputLayoutParams
         textInputLayout.hint = (getString(R.string.Specify_here))
         return textInputLayout
@@ -404,6 +434,7 @@ class CreateMazaadActivity : AppCompatActivity() {
         myEditText.setTextColor(Color.BLACK)
         myEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
         myEditText.inputType = InputType.TYPE_CLASS_TEXT
+        myEditText.layoutDirection=LayoutDirection.LTR
         return myEditText
     }
 

@@ -29,7 +29,7 @@ class MazaadSimilarGoodsAdapter(
 
 
     override fun getItemCount(): Int {
-        return 10
+        return 5
     }
     override fun onBindViewHolder(
         holder: MazaadSimilarGoodsAdapter.MazaadSimilarGoodsViewHolder,

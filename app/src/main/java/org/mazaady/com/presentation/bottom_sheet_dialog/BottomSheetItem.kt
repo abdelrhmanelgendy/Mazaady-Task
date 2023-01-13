@@ -5,7 +5,8 @@ data class BottomSheetTiles(
     var name:String,
     val items:ArrayList<BottomSheetItem>,
     var selectedOption:String="",
-    var isOtherAdded :Boolean?=false
+    var isOtherAdded :Boolean?=false,
+    var parent :String?=""
 
 
 )

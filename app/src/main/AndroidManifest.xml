@@ -19,13 +19,17 @@
         <activity
             android:theme="@style/customMazaadTheme"
             android:name=".presentation.mazaad_activity.MazaadActivity"
-            android:exported="false">
+            android:screenOrientation="nosensor"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".presentation.mazaad_result_viewer.MazaadResultActivity"
+            android:screenOrientation="nosensor"
+            android:configChanges="orientation|keyboardHidden|keyboard"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -35,6 +39,8 @@
 
             android:name=".presentation.create_mazaad.CreateMazaadActivity"
             android:exported="true"
+             android:screenOrientation="nosensor"
+            android:configChanges="orientation|keyboardHidden|keyboard"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
